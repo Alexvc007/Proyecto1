@@ -6,14 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Productos</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
 <body>
     <br>
     <div class="card m-4">
-        <div class="card-title d-flex justify-content-center align-items-center">
-            <h2>Productos</h2>
+        <div class="card-title">
+            <h2 class="d-flex justify-content-center align-items-center"><b>Productos</b></h2>
+            <div class="d-flex justify-content-end align-items-end px-4">
+                <a href="{{route('productos.create')}}" class="btn btn-primary">Registrar Producto</a>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -38,15 +42,14 @@
                                 <td>{{ $producto->precio }}</td>
                                 <td>
                                     <a class="btn btn-primary btn-sm"
-                                        href="{{route('productos.show',$producto)}}">Ver</a>
+                                        href="{{ route('productos.show', $producto) }}">Ver</a>
 
-                                    <a class="btn btn-info btn-sm"
-                                        href="">Editar</a>
+                                    <a class="btn btn-info btn-sm" href="{{route('productos.edit',$producto)}}">Editar</a>
 
-                                    <form action="" method="post">
+                                    <form action="{{route('productos.destroy',$producto)}}" method="post">
                                         @csrf
                                         @method('delete')
-
+ 
                                         <button class="btn btn-danger btn-sm"
                                             onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')"
                                             value="Borrar">Eliminar</button>

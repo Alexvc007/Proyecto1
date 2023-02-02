@@ -17,5 +17,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('productos', [ProductoController::class,'index'])->name('productos.index');
-Route::get('productosShow/{producto}', [ProductoController::class,'show'])->name('productos.show');
+
+Route::group(['prefix'=>'productos'],function (){
+    Route::get('/', [ProductoController::class,'index'])->name('productos.index');
+    Route::get('show/{producto}', [ProductoController::class,'show'])->name('productos.show');
+    Route::get('create', [ProductoController::class,'create'])->name('productos.create');
+    Route::post('store', [ProductoController::class,'store'])->name('productos.store');
+    Route::get('edit/{producto}', [ProductoController::class,'edit'])->name('productos.edit');
+    Route::put('update/{producto}', [ProductoController::class,'update'])->name('productos.update');
+    Route::delete('destroy/{producto}', [ProductoController::class,'destroy'])->name('productos.destroy');
+});
