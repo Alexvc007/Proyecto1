@@ -1,70 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('adminlte::page')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Productos</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
+@section('title', 'Productos')
 
-<body>
-    <br>
-    <div class="card m-4">
-        <div class="card-title">
-            <h2 class="d-flex justify-content-center align-items-center"><b>Productos</b></h2>
-            <div class="d-flex justify-content-end align-items-end px-4">
-                <a href="{{route('productos.create')}}" class="btn btn-primary">Registrar Producto</a>
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
+@section('content_header')
 
-                <table class="table table-striped" id="materias">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Costo</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col" width="15%">Acciones</th>
-                        </tr>
-                    </thead>
+@stop
 
-                    <tbody>
-                        @foreach ($productos as $producto)
-                            <tr>
-                                <td>{{ $producto->id }}</td>
-                                <td>{{ $producto->nombre }}</td>
-                                <td>{{ $producto->costo }}</td>
-                                <td>{{ $producto->precio }}</td>
-                                <td>
-                                    <a class="btn btn-primary btn-sm"
-                                        href="{{ route('productos.show', $producto) }}">Ver</a>
-
-                                    <a class="btn btn-info btn-sm" href="{{route('productos.edit',$producto)}}">Editar</a>
-
-                                    <form action="{{route('productos.destroy',$producto)}}" method="post">
-                                        @csrf
-                                        @method('delete')
- 
-                                        <button class="btn btn-danger btn-sm"
-                                            onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')"
-                                            value="Borrar">Eliminar</button>
-
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-
-                    </tbody>
-
-                </table>
-            </div>
+@section('content')
+<br>
+<div class="card m-4">
+    <div class="card-title">
+        <h2 class="d-flex justify-content-center align-items-center"><b>Productos</b></h2>
+        <div class="d-flex justify-content-end align-items-end px-4">
+            <a href="{{route('productos.create')}}" class="btn btn-primary">Registrar Producto</a>
         </div>
     </div>
-</body>
+    <div class="card-body">
+        <div class="table-responsive">
 
-</html>
+            <table class="table table-striped" id="materias">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Costo</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col" width="15%">Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach ($productos as $producto)
+                        <tr>
+                            <td>{{ $producto->id }}</td>
+                            <td>{{ $producto->nombre }}</td>
+                            <td>{{ $producto->costo }}</td>
+                            <td>{{ $producto->precio }}</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm"
+                                    href="{{ route('productos.show', $producto) }}">Ver</a>
+
+                                <a class="btn btn-info btn-sm" href="{{route('productos.edit',$producto)}}">Editar</a>
+
+                                <form action="{{route('productos.destroy',$producto)}}" method="post">
+                                    @csrf
+                                    @method('delete')
+
+                                    <button class="btn btn-danger btn-sm"
+                                        onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')"
+                                        value="Borrar">Eliminar</button>
+
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+@stop
+
+@section('css')
+
+@stop
+
+@section('js')
+
+@stop

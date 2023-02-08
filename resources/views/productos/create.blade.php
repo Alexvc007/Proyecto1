@@ -1,52 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Crear Producto</title>
-    {{--  Agregar mis propios estilos carpeta: /public/css/  --}}
-    {{--  <link rel="stylesheet" href="{{asset('css/style.css')}}">  --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    
-</head>
-<body>
-    <a class="btn btn-dark mx-4 my-2" href="{{route('productos.index')}}">Volver atras</a>
-    <div class="card m-4">
-        <div class="card-header d-flex justify-content-center">
-            Registrar Producto
-        </div>
-        <div class="card-body">
-            <form action="{{route('productos.store')}}" method="post">
-                @csrf
-                <div class="form-group">
-                    <label for="">Nombre del producto:</label>
-                    <input type="text" name="nombre" value="{{old('nombre')}}">
-                    @error('nombre')
-                        <small class="text-danger">{{$message}}</small>
-                    @enderror
-                </div>
+@extends('adminlte::page')
 
-                <div class="form-group">
-                    <label for="">Coste del producto:</label>
-                    <input type="number" name="costo" value="{{old('costo')}}">
-                    @error('costo')
-                        <small class="text-danger">{{$message}}</small>
-                    @enderror
-                </div>
+@section('title', 'Crear')
 
-                <div class="form-group">
-                    <label for="">Precio del producto:</label>
-                    <input type="number" name="precio" value="{{old('precio')}}">
-                    @error('precio')
-                        <small class="text-danger">{{$message}}</small>
-                    @enderror
-                </div>
-                <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary">Registrar</button>
-                </div>
-            </form>
-        </div>
+@section('content_header')
+
+@stop
+
+@section('content')
+<a class="btn btn-dark mx-4 my-2" href="{{route('productos.index')}}">Volver atras</a>
+<div class="card m-4">
+    <div class="card-header d-flex justify-content-center">
+        Registrar Producto
     </div>
-</body>
-</html>
+    <div class="card-body">
+        <form action="{{route('productos.store')}}" method="post">
+            @csrf
+            <div class="form-group">
+                <label for="">Nombre del producto:</label>
+                <input type="text" name="nombre" value="{{old('nombre')}}">
+                @error('nombre')
+                    <small class="text-danger">{{$message}}</small>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="">Coste del producto:</label>
+                <input type="number" name="costo" value="{{old('costo')}}">
+                @error('costo')
+                    <small class="text-danger">{{$message}}</small>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="">Precio del producto:</label>
+                <input type="number" name="precio" value="{{old('precio')}}">
+                @error('precio')
+                    <small class="text-danger">{{$message}}</small>
+                @enderror
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+@stop
+
+@section('css')
+
+@stop
+
+@section('js')
+
+@stop

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProductoController;
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +15,21 @@ use App\Http\Controllers\ProductoController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
+Auth::routes();
 
-Route::group(['prefix'=>'productos'],function (){
-    Route::get('/', [ProductoController::class,'index'])->name('productos.index');
-    Route::get('show/{producto}', [ProductoController::class,'show'])->name('productos.show');
-    Route::get('create', [ProductoController::class,'create'])->name('productos.create');
-    Route::post('store', [ProductoController::class,'store'])->name('productos.store');
-    Route::get('edit/{producto}', [ProductoController::class,'edit'])->name('productos.edit');
-    Route::put('update/{producto}', [ProductoController::class,'update'])->name('productos.update');
-    Route::delete('destroy/{producto}', [ProductoController::class,'destroy'])->name('productos.destroy');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::group(['prefix'=>'productos'],function (){
+        Route::get('/', [ProductoController::class,'index'])->name('productos.index');
+        Route::get('show/{producto}', [ProductoController::class,'show'])->name('productos.show');
+        Route::get('create', [ProductoController::class,'create'])->name('productos.create');
+        Route::post('store', [ProductoController::class,'store'])->name('productos.store');
+        Route::get('edit/{producto}', [ProductoController::class,'edit'])->name('productos.edit');
+        Route::put('update/{producto}', [ProductoController::class,'update'])->name('productos.update');
+        Route::delete('destroy/{producto}', [ProductoController::class,'destroy'])->name('productos.destroy');
+    });
+    
+    Route::get('/home', 'HomeController@index')->name('home');
 });
